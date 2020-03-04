@@ -5,7 +5,6 @@ import random
 import time
 import numpy as np
 from pathlib import Path
-import pyscreenshot as ImageGrab
 
 #### We need some kind of check to see if the game is running before we start trying to match templates ####
 ############################################################################################################
@@ -18,11 +17,12 @@ while True:
     'C:\TarkvaraProjekt\FAAKbot\Templates\Dr_Mundo.jpg', 'C:\TarkvaraProjekt\FAAKbot\Templates\Ezreal.jpg',
     'C:\TarkvaraProjekt\FAAKbot\Templates\Ivern.jpg', 'C:\TarkvaraProjekt\FAAKbot\Templates\Kindred.jpg' ]
 
-    image = ImageGrab.grab() # x1, y1, x2, y2    #Find out the necessary position
     #image.astype(np.float32)
+    image = pyautogui.screenshot()
     print(type(image))
+    image = np.array(image)
+    image = image[:, :, ::-1].copy()
     image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    #image = pyautogui.screenshot()
     #image.show()
     
     # Loop for template checking
